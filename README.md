@@ -37,7 +37,7 @@ innerFunction(5)
 ## Scope chain
 
 Scope chain: Javascript is going to look inside the current execution context to see if the variable "x" exist, if doesn't so it will go up the scope chain to the next closest parent execution context in this case it is closure scope, it will look for that variable and it exist
-
+![image](/execution_context_scope_chain.png)
 ![image](/scope_chain.png)
 
 ### Creation of Scope Chain :
