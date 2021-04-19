@@ -1,12 +1,12 @@
 # Javascript-base
 
-explain how javascript works in runtime environment:
+## explain how javascript works in runtime environment:
 eventloop, macrotaskqueue and microtaskqueue: https://javascript.info/event-loop
 
 just remember that microtask queue have more priorities than macrotask queue
 and the promise is thrown to microtask queue. This is the reason why eventloop get the promise from queue and throw it to call stack before the setimeout - in the macrotask queue
 
-# Execution context
+## Execution context
 
 When the Javascript Program start to run, it creates a global execution context. This execution context has 2 phases: **Creation Phase** and **Execution Phase**
 
@@ -19,7 +19,7 @@ In the creation phase, 4 different things happen:
 
 The next type of execution context is the Function Execution context which will happen when a function is invoked. The function execution context is exactly the same as global execution context except for creating a global object we create an arguments object and any arguments passed in the function get added as it like local variables to the execution context.
 
-# Closure
+## Closure
 
 Whenever you have a function inside another function, even if parent function exection context is removed from the stack the inner function will retain access to the variable environment of the parent execution context => Closure.
 
@@ -31,6 +31,6 @@ function out(x) {
 }
 ```
 
-# Scope chain
+## Scope chain
 
 Scope chain: Javascript is going to look inside the current execution context to see if the variable "x" exist, if doesn't so it will go up the scope chain to the next closest parent execution context in this case it is closure scope, it will look for that variable and it exist
