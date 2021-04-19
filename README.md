@@ -34,3 +34,48 @@ function out(x) {
 ## Scope chain
 
 Scope chain: Javascript is going to look inside the current execution context to see if the variable "x" exist, if doesn't so it will go up the scope chain to the next closest parent execution context in this case it is closure scope, it will look for that variable and it exist
+
+## Call, apply and bind
+
+### Basic rules worth remembering:
+**this** always refers to an object.
+**this** refers to an object which calls the function it contains.
+In the global context **this** refers to either window object or is undefined if the ‘strict mode’ is used.
+
+```javascript
+var car = { 
+    registrationNumber: "GA12345",
+    brand: "Toyota"
+}
+
+function displayOut() {
+    console.log(this.registrationNumber+ " " +this.brand)
+}
+```
+
+not work
+```javascript
+displayOut() // undefined undefined
+```
+
+Well, this won’t work as the **this** will be now assigned to the global context which doesn’t have neither the registrationNumber nor the brand property
+
+For such cases we can use the ECMAScript 5 **bind()** method of the Function.prototype property. This means **bind()** can be used by every single function.
+```javascript
+var myCarDetails = displayOut.bind(car); 
+myCarDetails(); // GA12345 Toyota
+```
+
+The bind() method creates a new function where “this” refers to the parameter in the parenthesis in the above case “car”. This way the bind() method enables calling a function with a specified “this” value.
+
+Call and apply behave exactly the same way, they will immediately invoke the function. With **call** you pass argument one by one, with **apply** you pass as an array.
+Bind exactly the same as call, but instead of immediatly invoke the function, it will return you a brand new function so you can invoke later
+
+```javascript
+displayOut.call(car, param1, param2)
+displayOut.apply(car, [param1, param2])
+var myCarDetails = displayOut.bind(car, param1, param2)
+myCarDetails()
+```
+# Primitives vs Objects (Primitives vs Reference Types)
+![image](/images/primitive_reference.png)
