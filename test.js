@@ -1,15 +1,16 @@
-var car = { 
-    registrationNumber: "GA12345",
-    brand: "Toyota",
-
-    displayDetails: function(){
-        console.log(this.registrationNumber + " " + this.brand);
-    }
+function f1() {
+    return this;
 }
 
-function displayOut() {
-    console.log(this.registrationNumber+ " " +this.brand)
+// In a browser:
+//   f1() === window; // true
+
+// In Node:
+console.log(f1() === global); // true
+
+function f2() {
+    'use strict'; // see strict mode
+    return this;
 }
 
-
-displayOut()
+console.log(f2()); // undefined

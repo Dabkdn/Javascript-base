@@ -24,23 +24,58 @@ The next type of execution context is the Function Execution context which will 
 Whenever you have a function inside another function, even if parent function exection context is removed from the stack the inner function will retain access to the variable environment of the parent execution context => Closure.
 
 ```javascript
-function out(x) {
-  function in(y) {
+function outer(x) {
+  return function inner(y) {
     return x + y;
   }
 }
+
+var innerFunction = outer(2)
+innerFunction(5)
 ```
 
 ## Scope chain
 
 Scope chain: Javascript is going to look inside the current execution context to see if the variable "x" exist, if doesn't so it will go up the scope chain to the next closest parent execution context in this case it is closure scope, it will look for that variable and it exist
 
+![image](/scope_chain.png)
+
+### Creation of Scope Chain :
+
+- A Scope defines the access to a variable from a place
+- Each function creates a scope: space or an environment in which the variables that it defines are accessible.
+- Lexical scoping: a function that is lexically within another function gets access to a scope of the outer function.
+
+The execution stack is different from the scope chain. An Execution Stack is an order in which functions are called but the scope chain is the order in which functions are written in the code
+
+You can find the difference with the example given below
+```javascript
+var a = 'Hello!';
+first();
+
+function first() {
+    var b = 'Hi!';
+    second();
+
+function second() {
+        var c = 'Hey!';
+        third()
+    }
+}
+
+function third() { //on top of execution stack
+  var d = 'John';
+  console.log(a+b+c+d); //here b and c not accessible by ScopeChain        
+}
+```
+
 ## Call, apply and bind
 
 ### Basic rules worth remembering:
-**this** always refers to an object.
-**this** refers to an object which calls the function it contains.
-In the global context **this** refers to either window object or is undefined if the ‘strict mode’ is used.
+
+- **this** always refers to an object.
+- **this** refers to an object which calls the function it contains.
+- In the global context **this** refers to either window object or is undefined if the ‘strict mode’ is used.
 
 ```javascript
 var car = { 
@@ -77,5 +112,13 @@ displayOut.apply(car, [param1, param2])
 var myCarDetails = displayOut.bind(car, param1, param2)
 myCarDetails()
 ```
+# This keyword
+
+- Call **this** in method: this => object call that method (not the object contains method)
+- Call **this** in simple function: this => undefined (strict mode) or global object (sloppy mode)
+- Call **this** in arrow function: this => this of parent scope (method or global). This is call lexical this
+- Call **this** in event listener: this => DOM Element that call callback.
+
 # Primitives vs Objects (Primitives vs Reference Types)
-![image](/images/primitive_reference.png)
+
+![image](/primitive_reference.png)
