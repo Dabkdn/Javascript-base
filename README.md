@@ -19,6 +19,14 @@ In the creation phase, 4 different things happen:
 
 The next type of execution context is the Function Execution context which will happen when a function is invoked. The function execution context is exactly the same as global execution context except for creating a global object we create an arguments object and any arguments passed in the function get added as it like local variables to the execution context.
 
+In the execution phase:
+- Starts running the code line by line inside the function.
+- Assigns the 'real' values to the variables already present in the memory.
+
+## Hoisting
+
+The process of assigning variable declarations a default value of 'undefined' during the creation phase is called Hoisting.
+
 ## Closure
 
 Whenever you have a function inside another function, even if parent function exection context is removed from the stack the inner function will retain access to the variable environment of the parent execution context => Closure.
@@ -120,5 +128,7 @@ myCarDetails()
 - Call **this** in event listener: this => DOM Element that call callback.
 
 # Primitives vs Objects (Primitives vs Reference Types)
+
+All JavaScript values, except primitives, are objects.
 
 ![image](/primitive_reference.png)
